@@ -18,3 +18,7 @@ create table user_tbl(
     foreign key(id_rol) references rol_tbl(id_rol) on delete cascade on update cascade
 );
 
+create table algo(
+	id_user integer auto_increment primary key not null
+);
+
