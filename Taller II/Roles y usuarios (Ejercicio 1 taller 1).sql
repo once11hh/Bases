@@ -48,27 +48,24 @@ create table tbl_doctor_specialties (
 );
 
 
-
+#Insertar registros en las tablas
 insert into tbl_doctor_specialty(specialty, description_specialty) 
 values('Especialidad en Anestesiologia y reanimacion','content1'),
 ('Especialidad en Cirugia general','content2'),
 ('Especialidad en Cirugia pediatrica','content3'),
 ('Especialidad en Endocrinologia','content4'); 
-
-
-#Insertar registros en las tablas
 insert into tbl_rols(rol) values('Doctor'),('Enfermera'),('Paciente'),('Familiar designado');
 insert into tbl_user(user_name, document, contact, id_rol) values('Jacinto','24310999','3040302303',1); #Usuario con id 1
 insert into tbl_user(user_name, document, contact, id_rol) values('Jose','2345','3148273626',1); #Usuario con id 2
 insert into tbl_user(user_name, document, contact, id_rol) values('Manuel','9865','314284923',2); #Usuario con id 3
 insert into tbl_user(user_name, document, contact, id_rol) values('Kelly','345639','3155829182',3); #Usuario con id 4
 insert into tbl_user(user_name, document, contact, id_rol) values('Luz','3456782','3016284823',4); #Usuario con id 5
-
 insert into tbl_address(city, department, latitude, length,id_user) values('Manizales','Caldas',5.064574, -75.501415,1);
-
 insert into tbl_doctor(code_doctor, id_user) values('DOC01',1);
 insert into tbl_doctor(code_doctor, id_user) values('DOC02',2);
-
+insert into tbl_doctor_specialties(id_doctor, id_doctor_specialty) values(1,4);
+insert into tbl_doctor_specialties(id_doctor, id_doctor_specialty) values(1,2);
+insert into tbl_doctor_specialties(id_doctor, id_doctor_specialty) values(2,3);
 
 #Mostrar informacion de los usuarios cuyo rol es doctor
 select tbl_rols.rol, tbl_user.user_name
@@ -94,13 +91,12 @@ inner join tbl_doctor on tbl_doctor.id_user = tbl_user.id_user
 where tbl_rols.id_rol = 1;
 
 #Mostrar el codigo, nombre y especialidad del doctor
-/*select tbl_doctor.code_doctor, tbl_user.user_name, tbl_doctor_specialty.specialty
+select tbl_doctor.code_doctor, tbl_doctor_specialty.specialty, tbl_user.user_name
 from tbl_user
 inner join tbl_rols on tbl_rols.id_rol = tbl_user.id_rol
 inner join tbl_doctor on tbl_doctor.id_user = tbl_user.id_user
-inner join tbl_doctor_specialty on tbl_doctor_specialty.id_doctor_specialty= tbl_doctor.id_doctor_specialty
-where tbl_rols.id_rol = 1 and tbl_doctor_specialty.id_doctor_specialty = 4;
-*/
+inner join tbl_doctor_specialties on tbl_doctor_specialties.id_doctor= tbl_doctor.id_doctor 
+inner join tbl_doctor_specialty on tbl_doctor_specialties.id_doctor_specialty = tbl_doctor_specialty.id_doctor_specialty 
 
 
 
