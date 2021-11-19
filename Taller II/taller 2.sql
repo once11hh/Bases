@@ -7827,9 +7827,9 @@ where Ventas_CliId = Cli_Id and Ventas_Id = Ventas_Id and Prod_Id =  Prod_Id;
 */
 
 #Mostrar el numero de factura, razon social, productos que compro, valor producto y  nombre del proveedor
-/*select Ventas_NroFactura as 'Numero factura', Cli_RazonSocial as 'Razon Social',  Prod_Descripcion as 'producto', VD_Precio as 'valor', Prov_Nombre as 'Nombre proveedor'
-from tbl_ventas, tbl_clients, tbl_ventas_detalle, tbl_products as p, tbl_vendors as pv
-where Ventas_CliId = Cli_Id and Ventas_Id = Ventas_Id and Prod_Id =  ProdId and p.Prov_Id = pv.Prov_Id;
+/*select Ventas_NroFactura as 'Numero factura', Cli_RazonSocial as 'Razon Social', Prod_Descripcion as 'producto', VD_Precio as 'precio',  Prov_Nombre 'Proveedor'
+from tbl_ventas as v, tbl_clients as c, tbl_products as p, tbl_ventas_detalle as vd, tbl_vendors as pv
+where v.Ventas_CliId = c.Cli_Id and v.Ventas_Id = vd.Ventas_Id and p.Prod_Id = vd.Prod_Id and p.Prov_Id = pv.Prov_Id;
 */
 
 #Order by
@@ -7845,5 +7845,5 @@ where Ventas_CliId = Cli_Id and Ventas_Id = Ventas_Id and Prod_Id =  ProdId and 
 #select Ventas_Neto from tbl_ventas where Ventas_CliId = 635;
 
 #Sumar el total de compras que ha realizado el cliente con id_razon_social CONSUMIDOR FINAL de productor del proveedor ANTHAY ELECTRONICA S.R.L.
-select sum(Ventas_Total) as 'Total de ventas' from tbl_ventas, tbl_vendors where Ventas_CliId = 1 and Prov_Id = 5;
+#select sum(Ventas_Total) as 'Total de ventas' from tbl_ventas, tbl_vendors where Ventas_CliId = 1 and Prov_Id = 5;
 
