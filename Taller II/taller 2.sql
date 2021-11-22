@@ -7847,3 +7847,91 @@ where v.Ventas_CliId = c.Cli_Id and v.Ventas_Id = vd.Ventas_Id and p.Prod_Id = v
 #Sumar el total de compras que ha realizado el cliente con id_razon_social CONSUMIDOR FINAL de productor del proveedor ANTHAY ELECTRONICA S.R.L.
 #select sum(Ventas_Total) as 'Total de ventas' from tbl_ventas, tbl_vendors where Ventas_CliId = 1 and Prov_Id = 5;
 
+
+# Hayar el promedio de las ventas totales del 2018
+#select avg(Ventas_Total) as promedio_ventas from  tbl_ventas where year(Ventas_Fecha) = 2018;
+
+# Hayar el promedio de las ventas totales del 2018 y mes en especifico
+/*select avg(Ventas_Total) as promedio_ventas, month(Ventas_Fecha) as mes, year(Ventas_Fecha) as año
+from  tbl_ventas
+where year(Ventas_Fecha) = 2018 and month(Ventas_Fecha) = 3;
+*/
+
+#Agrupar la suma total de las ventas por fechas
+/*select year(Ventas_Fecha) as año, month(Ventas_Fecha) as mes, day(Ventas_Fecha) as dia, sum(Ventas_Total) as total_ventas_dia
+from  tbl_ventas
+group by año, mes, dia;*/
+
+#Total del valor de la venta realizada a POMEZ FABIAN en la fecha 2 de enero de 2018
+/*select year(Ventas_Fecha) as año, month(Ventas_Fecha) as mes, day(Ventas_Fecha) as dia, sum(Ventas_Total) as total_ventas_dia, clientes.Cli_RazonSocial as cliente
+from  tbl_ventas, tbl_clients as clientes
+where year(Ventas_Fecha) = 2018 and month(Ventas_Fecha) = 1 and day(Ventas_Fecha) = 2 and clientes.Cli_RazonSocial = 'POMEZ FABIAN';
+*/
+
+/*
+select year(Ventas_Fecha) as año,
+	month(Ventas_Fecha) as mes, 
+    sum(Ventas_Total) as total_ventas_dia, 
+	min(Ventas_Total) as compra_menor_valor,
+    max(Ventas_Total) as compra_mayor_valor,
+    avg(Ventas_Total) as promedio,
+    count(Ventas_Total) as cantidad
+from tbl_ventas
+where Ventas_CliId = 1;
+*/
+
+#Obtener el total de las ventas por cada Ventas_CliId distinct
+/*select distinct(Ventas_CliId) as cliente, sum(Ventas_Total) as total
+from tbl_ventas
+group by Ventas_CliId;
+*/
+
+#Obtener el total de las ventas por cada cliente sin mostrar el cli_id duplicado
+/*select Cli_Id as 'Nro cliente', Cli_RazonSocial as 'Nombre cliente'
+from tbl_clients
+where Cli_Id not in(select distinct(Ventas_CliId) as cliente from tbl_ventas);
+*/
+
+/*select distinct(Cli_Id) as 'Nro cliente', Cli_RazonSocial as 'Nombre cliente'
+from tbl_clients, tbl_ventas
+where Cli_Id = Ventas_CliId;*/
+
+#Agrupando por fechas de compra
+/*select distinct(Ventas_Fecha)  as fecha, Ventas_CliId as cliente
+from tbl_clients, tbl_ventas
+group by Ventas_Fecha;*/
+
+#Filtrando por fechas
+/*select distinct(Ventas_Fecha)  as fecha, Ventas_CliId as cliente
+from tbl_clients, tbl_ventas
+where Ventas_Fecha >= '2018-01-20' and  Ventas_Fecha <='2018-02-20'
+group by Ventas_Fecha;*/
+
+/*
+select Prod_Id as 'Producto codigo', Prod_Descripcion as 'Producto descripcion'
+from tbl_products*/
+
+#Usando between
+/*select distinct(Ventas_Fecha)  as fecha, Ventas_CliId as cliente
+from tbl_clients, tbl_ventas
+where Ventas_Fecha  between '2018-01-20' and '2018-02-20'
+group by Ventas_Fecha;*/
+
+
+#Clausula like
+# Inicia %D
+# Finaliza D%
+# Contiene no importa la posicion %D%
+# Contiene en la segunda posicion _D%
+# contiene la letra en una determinada posicion ____D%
+/*select Prod_Id as 'Producto codigo', Prod_Descripcion as 'Producto descripcion'
+from tbl_products
+where Prod_Descripcion like '_________D%';*/
+
+/*select Prod_Id as 'Producto codigo', Prod_Descripcion as 'Producto descripcion'
+from tbl_products
+where concat(Prod_Descripcion, Prod_Descripcion) like 'D%';*/
+
+
+
+
