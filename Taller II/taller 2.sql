@@ -7932,6 +7932,57 @@ where Prod_Descripcion like '_________D%';*/
 from tbl_products
 where concat(Prod_Descripcion, Prod_Descripcion) like 'D%';*/
 
+#25/11/2021
+#Eliminar registros de la tabla ventas
+#delete from tbl_ventas;
+
+#Eliminar registros de la tabla ventas con where y condicion
+/*delete from tbl_ventas
+where Ventas_Fecha  between '2018-02-20' and '2018-02-22';
+*/
+
+#Eliminar tabla
+#drop  table tbl_ventas;
+
+#truncate tbl_ventas;
+#La palabra table queda opcional
+
+#Actualizar una tabla
+update tbl_clients 
+set Cli_RazonSocial = 'UNIVERSIDAD DE CALDAS' 
+where Cli_RazonSocial = 'CONSUMIDOR FINAL';
+
+
+#Mostrar la fecha de la venta y el numero de la factura, razon social del cliente que realizo la compra
+#usando inner join
+/*select  Ventas_Fecha as 'fecha', Ventas_NroFactura as 'numero de la factura', Cli_RazonSocial as 'cliente'
+from tbl_ventas
+inner join tbl_clients
+ON Ventas_CliId = Cli_Id;*/
+
+
+#obtener el promedio de total de ventas que ha realizado el cliente con razon social UNIVERSIDAD DE CALDAS 
+/*select Cli_RazonSocial as 'Razon Social', avg(Ventas_Total) as 'Promedio total Compra'
+from tbl_clients
+inner join tbl_ventas
+on Ventas_CliId = Cli_Id
+where Cli_RazonSocial = 'UNIVERSIDAD DE CALDAS';*/
+
+
+#obtener el promedio de total de ventas que ha realizado el cliente con razon social UNIVERSIDAD DE CALDAS 
+# de productos del proveedor DISTRIBUIDORA DEL SUR S.R.L.
+select  Prov_Nombre as 'Nombre proveedor', avg(Ventas_Total) as 'Promedio total Compra',  Cli_RazonSocial as 'cliente'
+from tbl_products p 
+inner join tbl_vendors v on p.Prov_Id = v.Prov_Id and Prov_Nombre = 'DISTRIBUIDORA DEL SUR S.R.L.'
+inner join tbl_ventas_detalle vd on p.Prod_Id = vd.Prod_Id
+inner join tbl_ventas vt on vd.Ventas_Id = vt.Ventas_Id
+inner join tbl_clients on Cli_RazonSocial = 'UNIVERSIDAD DE CALDAS';
+
+
+
+
+
+
 
 
 
